@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        
+        body {
+            background-image: url(./ttt-background.jpg);
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .square {
+            border: solid 1px rgb(0, 0, 0);
+            width: 100px;
+            height: 100px;
+            margin-left: 5px;
+            font-size: 70px;
+            text-align: center;
+            align-content: center;
+        }
+
+        .square:hover {
+            background-color:rgb(221, 221, 247, 0.3);
+        }
+
+        .flex_container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+            justify-content: center; 
+        }
+
+        .info_box {
+            width: 325px;
+            min-height: 20px;
+            background-color: rgba(205, 205, 250, 0.7);
+            margin: 10px auto;
+            text-align: center;
+            border: 2px dashed black;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        .win-condition {
+            width: 325px;
+            min-height: 20px;
+            background-color: rgba(205, 205, 250, 0.7);
+            margin: 10px auto;
+            margin-top: 30px;
+            text-align: center;
+            border: 2px dashed black;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        button {
+            display: flex;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px; /* Optional */
+        }
+
+    </style>
+    <title>Tic-Tac-Toe 3</title>
+</head>
+<body>
+    <h1 class="title">TIC-TAC-TOE: 2 Letters, Infinite Possibilities.</h1>
+    <div class="info_box">---</div>
+    <div class="flex_container">
+        <script>
+            const NUM_SQUARES = 9;
+            for (i=0; i<NUM_SQUARES; i++)
+            {
+                id = "sq"+i;
+                document.write("<div class='square' id='" + id + "'></div>" );
+            }
+        </script>  
+    </div>
+    <div class="win-condition">
+        Game in Progress
+    </div>
+    <div class="button-container">
+        <button>Start Game!!!</button>
+    </div>
+    <script>
+        let X = 'X';
+        let O = 'O';
+        let current = Math.random() < 0.5 ? X : O;
+        function change_turn() {
+            $(".info_box").text("Player " + current + "'s Turn."); 
+        }
+        $(document).ready( function() {
+            change_turn();
+            $(".square").click(function() {
+                if ($(this).text() !== X && $(this).text() !== O) {
+                    $(this).text(current);
+                    alert(this.id[2])
+                    if (current === X) {
+                        current = O;
+                        change_turn();
+                    }else {
+                        current = X;
+                        change_turn();
+                    }
+                }
+            });
+            $(".button-container").click(function() {
+                for(let i = 0; i < NUM_SQUARES; i++) {
+                    $("#sq" + i).text("");
+                }
+            })
+        });
+    </script>
+</body>
+</html>

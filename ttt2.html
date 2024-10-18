@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        body {
+            background-image: url(./ttt-background.jpg);
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .square {
+            border: solid 1px rgb(0, 0, 0);
+            width: 100px;
+            height: 100px;
+            margin-left: 5px;
+            font-size: 70px;
+            text-align: center;
+            align-content: center;
+        }
+
+        .square:hover {
+            background-color:rgb(221, 221, 247, 0.3);
+        }
+
+        .flex_container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+            justify-content: center; 
+        }
+
+        .info_box {
+            width: 325px;
+            min-height: 20px;
+            background-color: rgba(205, 205, 250, 0.7);
+            margin: 10px auto;
+            text-align: center;
+            border: 2px dashed black;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        .win-condition {
+            width: 325px;
+            min-height: 20px;
+            background-color: rgba(205, 205, 250, 0.7);
+            margin: 10px auto;
+            margin-top: 30px;
+            text-align: center;
+            border: 2px dashed black;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+    </style>
+    <title>Tic-Tac-Toe 2</title>
+</head>
+<body>
+    <h1 class="title">TIC-TAC-TOE: 2 Letters, Infinite Possibilities.</h1>
+    <div class="info_box">Player X's Turn</div>
+    <div class="flex_container">
+        <script>
+            const NUM_SQUARES = 9;
+            for (i=0; i<NUM_SQUARES; i++)
+            {
+                id = "sq"+i;
+                document.write("<div class='square' id='" + id + "'></div>" );
+            }
+            document.getElementById("sq2").textContent = 'X';
+            document.getElementById("sq3").textContent = 'O'; 
+        </script>  
+    </div>
+    <div class="win-condition">
+        Player X Wins
+    </div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        
+        body {
+            background-image: url(./ttt-background.jpg);
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .square {
+            border: solid 1px rgb(0, 0, 0);
+            width: 100px;
+            height: 100px;
+            margin-left: 5px;
+            font-size: 70px;
+            text-align: center;
+            align-content: center;
+        }
+
+        .square:hover {
+            background-color:rgb(221, 221, 247, 0.3);
+        }
+
+        .flex_container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+            justify-content: center; 
+        }
+
+        .info_box {
+            width: 325px;
+            min-height: 20px;
+            background-color: rgba(205, 205, 250, 0.7);
+            margin: 10px auto;
+            text-align: center;
+            border: 2px dashed black;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        .win-condition {
+            width: 325px;
+            min-height: 20px;
+            background-color: rgba(205, 205, 250, 0.7);
+            margin: 10px auto;
+            margin-top: 30px;
+            text-align: center;
+            border: 2px dashed black;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        button {
+            display: flex;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px; /* Optional */
+        }
+
+    </style>
+    <title>Tic-Tac-Toe 4</title>
+</head>
+<body>
+    <h1 class="title">TIC-TAC-TOE: 2 Letters, Infinite Possibilities.</h1>
+    <div class="info_box">---</div>
+    <div class="flex_container">
+        <script>
+            const NUM_SQUARES = 9;
+            for (i=0; i<NUM_SQUARES; i++)
+            {
+                id = "sq"+i;
+                document.write("<div class='square' id='" + id + "'></div>" );
+            }
+        </script>  
+    </div>
+    <div class="win-condition">
+        Game in Progress
+    </div>
+    <div class="button-container">
+        <button>Start Game!!!</button>
+    </div>
+    <script>
+        let X = 'X';
+        let O = 'O';
+        let current = Math.random() < 0.5 ? X : O;
+        let moves = [];
+        let winConditions = [];
+        let noWinner = true;
+        let animationInterval = null;
+        function change_turn() {
+            $(".info_box").text("Player " + current + "'s Turn."); 
+        };
+        function forEach() {
+            moves = [];
+            for(let i = 0; i < NUM_SQUARES; i++) {
+                if ($("#sq" + i).text() === ""){
+                    moves.push("-")
+                }else {
+                    moves.push($("#sq" + i).text());
+                }
+                
+            }
+        };
+        function gather(a, b, c, moves) {
+            return moves[a] + moves[b] + moves[c];
+        };
+        function populate_win_condition() {
+            winConditions = [];
+            winConditions.push(gather(0, 1, 2, moves));
+            winConditions.push(gather(3, 4, 5, moves));
+            winConditions.push(gather(6, 7, 8, moves));
+            winConditions.push(gather(0, 3, 6, moves));
+            winConditions.push(gather(1, 4, 7, moves));
+            winConditions.push(gather(2, 5, 8, moves));
+            winConditions.push(gather(0, 4, 8, moves));
+            winConditions.push(gather(2, 4, 6, moves));
+        };
+        function find_win() {
+            for(let triple of winConditions) {
+                if (triple === "XXX") {
+                    return 1;
+                }else if (triple === "OOO") {
+                    return -1;
+                }
+            }
+            return 0;
+        };
+        function find_draw() {
+            for(let move of moves) {
+                if (move === "-") {
+                    return 0;
+                }
+            }
+            return 1;
+        };
+        function stop_button_animation() {
+            clearInterval(animationInterval);
+        };
+        function animate_button() {
+            clearInterval(animationInterval);
+            animationInterval = setInterval(function() {
+                $(".button-container button")
+                    .animate({ marginTop: "-=10px" }, 100)
+                    .animate({ marginTop: "+=10px" }, 100);
+            }, 1000); 
+        };
+        function check_status() {
+            forEach();
+            populate_win_condition();
+            let win = find_win();
+            if (win === 1) {
+                $(".win-condition").text("Player X has Won!!!");
+                noWinner = false;
+                animate_button();
+            }else if (win === -1) {
+                $(".win-condition").text("Player O has Won!!!");
+                noWinner = false;
+                animate_button();
+            }
+            if (find_draw() === 1) {
+                $(".win-condition").text("Game Drawn.");
+                noWinner = false
+                animate_button();
+            }
+        };
+        $(document).ready( function() {
+            change_turn();
+            $(".square").click(function() {
+                if ($(this).text() !== X && $(this).text() !== O && noWinner) {
+                    $(this).text(current);
+                    check_status();
+                    if (current === X) {
+                        current = O;
+                    }else {
+                        current = X;
+                    }
+                    change_turn();
+                }
+            });
+            $(".button-container button").click(function() {
+                for (let i = 0; i < NUM_SQUARES; i++) {
+                    $("#sq" + i).text("");
+                }
+                $(".win-condition").text("Game in Progress.");
+                noWinner = true;
+                current = Math.random() < 0.5 ? X : O;
+                change_turn();
+                stop_button_animation();
+            });
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url(./ttt-background.jpg);
+        }
+        .title {
+            text-align: center;
+        }
+
+        .square {
+            border: solid 1px rgb(0, 0, 0);
+            width: 100px;
+            height: 100px;
+            margin-left: 5px;
+            font-size: 70px;
+            text-align: center;
+            align-content: center;
+        }
+
+        .square:hover {
+            background-color:rgb(221, 221, 247, 0.3);
+        }
+
+        .flex_container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+            justify-content: center; 
+        }
+
+    </style>
+    <title>Tic-Tac-Toe 1</title>
+</head>
+<body>
+    <h1 class="title">TIC-TAC-TOE</h1>
+    <div class="flex_container">
+        <div class="square" id="square_00">X</div>
+        <div class="square" id="square_01"></div>
+        <div class="square" id="square_02"></div>
+        <div class="square" id="square_10"></div>
+        <div class="square" id="square_11">O</div>
+        <div class="square" id="square_12"></div>
+        <div class="square" id="square_21"></div>
+        <div class="square" id="square_22"></div>
+        <div class="square" id="square_23">X</div>
+    </div>
+</body>
+</html>
