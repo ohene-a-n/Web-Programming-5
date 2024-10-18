@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+e<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -168,8 +168,7 @@
                 $(".win-condition").text("Player O has Won!!!");
                 noWinner = false;
                 animate_button();
-            }
-            if (find_draw() === 1) {
+            }else if (find_draw() === 1) {
                 $(".win-condition").text("Game Drawn.");
                 noWinner = false
                 animate_button();
